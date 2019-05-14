@@ -1,0 +1,18 @@
+
+# dependencies
+node_modules
+
+# logs
+npm-debug.log
+
+# Nuxt build
+.next
+
+# Nuxt generate
+dist
+
+# Backpack build
+build
+
+# mac finder
+.DS_Store
