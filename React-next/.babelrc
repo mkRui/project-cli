@@ -6,6 +6,15 @@
           "libraryName": "antd",
           "style": true
         }
+      ],
+      [
+        "module-resolver", {
+          "root": ["./"],
+          "alias": {
+            "@": "./components",
+            "s": "./static/less",
+          }
+        }
       ]
     ]
   }
