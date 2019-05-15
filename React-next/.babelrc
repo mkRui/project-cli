@@ -1,0 +1,12 @@
+{
+    "presets": ["next/babel"], // next babel 转义器
+    "plugins": [ // 引入插件 antd 
+      [
+        "import", { // 指定参数 antd 
+          "libraryName": "antd",
+          "style": true
+        }
+      ]
+    ]
+  }
+  
