@@ -1,7 +1,7 @@
 {
   "name": "king-nextjs",
   "version": "1.0.0",
-  "description": "金桔官网 服务器端渲染 使用next.js架构",
+  "description": "服务器端渲染 使用next.js架构",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
