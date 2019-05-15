@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Teeup/gqtrade.git"
+    "url": "git+https://github.com/CoderRui/project-cli.git"
   },
   "author": "CoderRui",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Teeup/gqtrade/issues"
+    "url": "https://github.com/CoderRui/project-cli/issues"
   },
-  "homepage": "https://github.com/Teeup/gqtrade#readme",
+  "homepage": "https://github.com/CoderRui/project-cli#readme",
   "dependencies": {
     "@zeit/next-less": "^1.0.1",
     "antd": "^3.18.1",
