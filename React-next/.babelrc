@@ -4,6 +4,7 @@
       [
         "import", { // 指定参数 antd 
           "libraryName": "antd",
+          "libraryDirectory":"lib",
           "style": true
         }
       ],
