@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 
 import RouteCom from '@/routes/RouteCom';
 
 const OverviewData = () => {
-    return (
-        <div>
-            <RouteCom />
-        </div>
-    )
-}
+  return (
+    <div>
+      <RouteCom />
+    </div>
+  );
+};
 
-export default OverviewData
+export default OverviewData;

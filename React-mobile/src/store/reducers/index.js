@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 
-
 const Common = (state = {}, action) => {
   switch (action.type) {
     case 'setLoginToken':

@@ -41,7 +41,11 @@ const RouteCom = () => {
 
   return (
     <Switch>
-      <Route exact path="/Home" render={() => <Redirect to="/Home/OverviewData" />} />
+      <Route
+        exact
+        path="/Home"
+        render={() => <Redirect to="/Home/OverviewData" />}
+      />
       {recursive(config)}
       <Route render={() => <Redirect to="/404" />} />
     </Switch>

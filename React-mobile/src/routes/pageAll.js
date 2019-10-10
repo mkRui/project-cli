@@ -1,6 +1,6 @@
 import Home from '@/page/Home';
 
-import OverviewData from '@/page/Overview/OverviewData'
+import OverviewData from '@/page/Overview/OverviewData';
 
 export default {
   Home,

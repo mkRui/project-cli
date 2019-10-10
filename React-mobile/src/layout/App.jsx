@@ -12,14 +12,14 @@ function App() {
   return (
     <div className="App">
       <HashRouter>
-          <div>
-            <Switch>
-              <Route exact path="/" render={() => <Redirect to="/Home" />} />
-              <Route path="/Home" component={Home}></Route>
-              <Route path="/404" component={noFund}></Route>
-              <Route render={() => <Redirect to="/404" />} />
-            </Switch>
-          </div>
+        <div>
+          <Switch>
+            <Route exact path="/" render={() => <Redirect to="/Home" />} />
+            <Route path="/Home" component={Home}></Route>
+            <Route path="/404" component={noFund}></Route>
+            <Route render={() => <Redirect to="/404" />} />
+          </Switch>
+        </div>
       </HashRouter>
     </div>
   );
