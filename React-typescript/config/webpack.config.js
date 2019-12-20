@@ -81,7 +81,7 @@ module.exports = function(webpackEnv) {
   const env = getClientEnvironment(publicUrl);
 
   // common function to get style loaders
-  const getStyleLoaders = (cssOptions, preProcessor) => {
+  const getStyleLoaders = (cssOptions, preProcessor, stylesLoader) => {
     const loaders = [
       isEnvDevelopment && require.resolve('style-loader'),
       isEnvProduction && {
@@ -119,28 +119,23 @@ module.exports = function(webpackEnv) {
       },
     ].filter(Boolean);
     if (preProcessor) {
-      loaders.push(
-        {
-          loader: require.resolve('resolve-url-loader'),
-          options: {
-            sourceMap: isEnvProduction && shouldUseSourceMap,
-          },
+      loaders.push({
+        loader: require.resolve(preProcessor),
+        options: {
+          sourceMap: isEnvProduction && shouldUseSourceMap,
+          javascriptEnabled: true
         },
-        {
-          loader: require.resolve(preProcessor),
-          options: {
-            sourceMap: true,
-          },
+      });
+    }
+    if (stylesLoader) {
+      loaders.push({
+        loader: require.resolve('style-resources-loader'),
+        options: {
+          patterns: [
+            path.resolve(__dirname, './../src/style/Common.scss')
+          ]
         },
-        {
-          loader: require.resolve('sass-resources-loader'),
-          options: {
-            resources: [
-              './src/styles/scss/global.scss'
-            ]
-          }
-        }
-      );
+      });
     }
     return loaders;
   };
@@ -482,7 +477,7 @@ module.exports = function(webpackEnv) {
                   importLoaders: 2,
                   sourceMap: isEnvProduction && shouldUseSourceMap,
                 },
-                'sass-loader'
+                'sass-loader', true
               ),
               // Don't consider CSS imports dead code even if the
               // containing package claims to have no side effects.
@@ -501,7 +496,7 @@ module.exports = function(webpackEnv) {
                   modules: true,
                   getLocalIdent: getCSSModuleLocalIdent,
                 },
-                'sass-loader'
+                'sass-loader', true
               ),
             },
             // "file" loader makes sure those assets get served by WebpackDevServer.
