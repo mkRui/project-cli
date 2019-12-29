@@ -301,8 +301,7 @@ module.exports = function(webpackEnv) {
       // `web` extension prefixes have been added for better support
       // for React Native Web.
       extensions: paths.moduleFileExtensions
-        .map(ext => `.${ext}`)
-        .filter(ext => useTypeScript || !ext.includes('ts')),
+        .map(ext => `.${ext}`),
       alias: {
         '@': paths.appSrc,
         // Support React Native Web
