@@ -27,6 +27,18 @@ const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpack
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const eslint = require('eslint');
 
+const HappyPack = require('happypack')
+const os = require('os');
+
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
+const createHappyPlugin = (id, loaders) => new HappyPack({
+  id: id,
+  loaders: loaders,
+  threadPool: happyThreadPool,
+  cache: false,
+  verbose: true
+});
+
 const postcssNormalize = require('postcss-normalize');
 
 const appPackageJson = require(paths.appPackageJson);
@@ -379,7 +391,7 @@ module.exports = function(webpackEnv) {
             {
               test: /\.(js|mjs|jsx|ts|tsx)$/,
               include: paths.appSrc,
-              loader: require.resolve('babel-loader'),
+              loader: 'happypack/loader?id=happybabel',
               options: {
                 customize: require.resolve(
                   'babel-preset-react-app/webpack-overrides'
@@ -525,6 +537,7 @@ module.exports = function(webpackEnv) {
       ],
     },
     plugins: [
+      createHappyPlugin('happy-babel', ['babel-loader']),
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(

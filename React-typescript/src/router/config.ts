@@ -2,9 +2,12 @@
 
 import * as path from './path'
 
+import * as components from './route-component'
+
 const config = [
     {
-        path: path.Index,
+        path: path.Home,
+        components
     }
 ]
 
