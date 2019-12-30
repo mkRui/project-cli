@@ -34,3 +34,5 @@ Typescript
 ```
 Webpack
 ```
+> Webpack 优化
+- happyPack 优化打包速度 问题更新 [issue](https://github.com/amireh/happypack/issues/183) 配置优化打包速度

@@ -21,8 +21,4 @@ const asyncComponent = (component: any) => {
     });
 };
 
-const Home = asyncComponent(() => import('@/page/home'))
-
-export {
-    Home
-}
+export const Home = asyncComponent(() => import('@/page/home'))

@@ -34,9 +34,7 @@ const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 const createHappyPlugin = (id, loaders) => new HappyPack({
   id: id,
   loaders: loaders,
-  threadPool: happyThreadPool,
-  cache: false,
-  verbose: true
+  threadPool: happyThreadPool
 });
 
 const postcssNormalize = require('postcss-normalize');
@@ -391,33 +389,7 @@ module.exports = function(webpackEnv) {
             {
               test: /\.(js|mjs|jsx|ts|tsx)$/,
               include: paths.appSrc,
-              loader: 'happypack/loader?id=happybabel',
-              options: {
-                customize: require.resolve(
-                  'babel-preset-react-app/webpack-overrides'
-                ),
-                
-                plugins: [
-                  [
-                    require.resolve('babel-plugin-named-asset-import'),
-                    {
-                      loaderMap: {
-                        svg: {
-                          ReactComponent:
-                            '@svgr/webpack?-svgo,+titleProp,+ref![path]',
-                        },
-                      },
-                    },
-                  ],
-                ],
-                // This is a feature of `babel-loader` for webpack (not Babel itself).
-                // It enables caching results in ./node_modules/.cache/babel-loader/
-                // directory for faster rebuilds.
-                cacheDirectory: true,
-                // See #6846 for context on why cacheCompression is disabled
-                cacheCompression: false,
-                compact: isEnvProduction,
-              },
+              loader: 'happypack/loader?id=happybabel'
             },
             // Process any JS outside of the app with Babel.
             // Unlike the application JS, we only compile the standard ES features.
@@ -537,7 +509,38 @@ module.exports = function(webpackEnv) {
       ],
     },
     plugins: [
-      createHappyPlugin('happy-babel', ['babel-loader']),
+      createHappyPlugin('happybabel', [
+        {
+          loader: 'babel-loader',
+          cache: true,
+          options: {
+            customize: require.resolve(
+              'babel-preset-react-app/webpack-overrides'
+            ),
+            
+            plugins: [
+              [
+                require.resolve('babel-plugin-named-asset-import'),
+                {
+                  loaderMap: {
+                    svg: {
+                      ReactComponent:
+                        '@svgr/webpack?-svgo,+titleProp,+ref![path]',
+                    },
+                  },
+                },
+              ],
+            ],
+            // This is a feature of `babel-loader` for webpack (not Babel itself).
+            // It enables caching results in ./node_modules/.cache/babel-loader/
+            // directory for faster rebuilds.
+            cacheDirectory: true,
+            // See #6846 for context on why cacheCompression is disabled
+            cacheCompression: false,
+            compact: isEnvProduction,
+          },
+        }
+      ]),
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(
