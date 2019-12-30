@@ -1,3 +1,4 @@
+// 必须增加 baseUrl paths 才能确保 webpack alias 正常使用
 {
   "compilerOptions": {
     "target": "es5",
@@ -6,6 +7,12 @@
       "dom.iterable",
       "esnext"
     ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
