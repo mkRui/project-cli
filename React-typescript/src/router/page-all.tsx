@@ -21,4 +21,7 @@ const asyncComponent = (component: any) => {
     });
 };
 
-export const Home = asyncComponent(() => import('@/page/home'))
+export const Home = asyncComponent(() => import('@/page/Home'))
+
+export const Login = asyncComponent(() => import('@/page/Login'))
+
