@@ -142,7 +142,7 @@ module.exports = function(webpackEnv) {
         loader: require.resolve('style-resources-loader'),
         options: {
           patterns: [
-            path.resolve(__dirname, './../src/style/Common.scss')
+            path.resolve(__dirname, './../src/styles/scss/Common.scss')
           ]
         },
       });
