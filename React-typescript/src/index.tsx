@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 
 import Store from './store'
 
-import 'antd/dist/antd.css';
+import '@/styles/scss/Common.less';
 
 ReactDOM.render(
     <Provider store={Store}>

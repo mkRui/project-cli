@@ -59,6 +59,8 @@ const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
+const lessRegex = /\.less$/;
+const lessModuleRegex = /\.module\.less$/;
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
@@ -142,7 +144,7 @@ module.exports = function(webpackEnv) {
         loader: require.resolve('style-resources-loader'),
         options: {
           patterns: [
-            path.resolve(__dirname, './../src/style/Common.scss')
+            path.resolve(__dirname, './../src/styles/scss/Common.less')
           ]
         },
       });
@@ -482,6 +484,28 @@ module.exports = function(webpackEnv) {
                 'sass-loader', true
               ),
             },
+            {
+              test: lessRegex,
+              exclude: lessModuleRegex,
+              use: getStyleLoaders(
+              {
+                  importLoaders: 2,
+                  sourceMap: isEnvProduction && shouldUseSourceMap
+              }, 'less-loader', false
+              ),
+              sideEffects: true,
+            },
+            {
+              test: lessModuleRegex,
+              use: getStyleLoaders(
+              {
+                  importLoaders: 2,
+                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                  modules: true, // 模块化
+                  getLocalIdent: getCSSModuleLocalIdent,
+              }, 'less-loader', false
+              ),
+            },
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
             // In production, they would get copied to the `build` folder.
@@ -493,7 +517,7 @@ module.exports = function(webpackEnv) {
               // its runtime that would otherwise be processed through "file" loader.
               // Also exclude `html` and `json` extensions so they get processed
               // by webpacks internal loaders.
-              exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/, /\.scss$/],
+              exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/, /\.scss$/, /\.less$/],
               options: {
                 name: 'static/media/[name].[hash:8].[ext]',
               },
