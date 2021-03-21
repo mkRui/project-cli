@@ -21,7 +21,7 @@
   "homepage": "https://github.com/CoderRui/project-cli#readme",
   "dependencies": {
     "antd": "^3.18.1",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "consola": "^2.6.1",
     "express": "^4.16.4",
     "less": "^3.9.0",
