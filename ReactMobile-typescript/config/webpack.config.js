@@ -25,6 +25,8 @@ const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 
+const px2rem = require('postcss-px2rem')
+
 const postcssNormalize = require('postcss-normalize');
 
 const appPackageJson = require(paths.appPackageJson);
@@ -100,12 +102,13 @@ module.exports = function(webpackEnv) {
               },
               stage: 3,
             }),
+            px2rem({remUnit: 75}),
             // Adds PostCSS Normalize as the reset css with default options,
             // so that it honors browserslist config in package.json
             // which in turn let's users customize the target behavior as per their needs.
             postcssNormalize(),
           ],
-          sourceMap: isEnvProduction && shouldUseSourceMap,
+          sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
         },
       },
     ].filter(Boolean);
@@ -114,7 +117,8 @@ module.exports = function(webpackEnv) {
         {
           loader: require.resolve('resolve-url-loader'),
           options: {
-            sourceMap: isEnvProduction && shouldUseSourceMap,
+            sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
+            root: paths.appSrc
           },
         },
         {
@@ -125,11 +129,20 @@ module.exports = function(webpackEnv) {
               javascriptEnabled: true
             },
           },
-        }
+        },
+        {
+          loader: require.resolve('style-resources-loader'),
+          options: {
+            patterns: [
+              path.resolve(__dirname, '../src/styles/tools/color.less')
+            ]
+          },
+        },
       );
     }
     return loaders;
   };
+
 
   return {
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',

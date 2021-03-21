@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './layout/App';
 import * as serviceWorker from './serviceWorker';
+import 'lib-flexible';
 import '@/styles/common.less'
 
 // store

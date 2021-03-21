@@ -19,7 +19,7 @@ function App() {
       <div className="App">
         <HashRouter>
           <Switch>
-            <Route exact path="/" render={() => <Redirect to="/Login" />} />
+            <Route exact path="/" render={() => <Redirect to="/Home" />} />
             <Route path='/Home' component={components.Home} />          
           </Switch>
         </HashRouter>

@@ -105,7 +105,7 @@ module.exports = function(webpackEnv) {
             // which in turn let's users customize the target behavior as per their needs.
             postcssNormalize(),
           ],
-          sourceMap: isEnvProduction && shouldUseSourceMap,
+          sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
         },
       },
     ].filter(Boolean);
@@ -114,7 +114,8 @@ module.exports = function(webpackEnv) {
         {
           loader: require.resolve('resolve-url-loader'),
           options: {
-            sourceMap: isEnvProduction && shouldUseSourceMap,
+            sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
+            root: paths.appSrc
           },
         },
         {
@@ -125,7 +126,15 @@ module.exports = function(webpackEnv) {
               javascriptEnabled: true
             },
           },
-        }
+        },
+        {
+          loader: require.resolve('style-resources-loader'),
+          options: {
+            patterns: [
+              path.resolve(__dirname, '../src/styles/tools/color.less')
+            ]
+          },
+        },
       );
     }
     return loaders;
